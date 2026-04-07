@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f0c29"/>
+      <stop offset="50%" style="stop-color:#1a1a3e"/>
+      <stop offset="100%" style="stop-color:#24243e"/>
+    </linearGradient>
+    <linearGradient id="sunGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFD700"/>
+      <stop offset="100%" style="stop-color:#F2A900"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#F2A900"/>
+      <stop offset="100%" style="stop-color:#FFD700"/>
+    </linearGradient>
+    <filter id="sunGlow">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="20" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+
+  <!-- Subtle grid pattern -->
+  <g opacity="0.03" stroke="white" stroke-width="1">
+    <line x1="0" y1="0" x2="1200" y2="630"/>
+    <line x1="200" y1="0" x2="1200" y2="500"/>
+    <line x1="400" y1="0" x2="1200" y2="400"/>
+    <line x1="0" y1="200" x2="1000" y2="630"/>
+    <line x1="0" y1="400" x2="800" y2="630"/>
+  </g>
+
+  <!-- App icon background -->
+  <rect x="80" y="180" width="160" height="160" rx="36" fill="#1e1e3a" stroke="#2a2a50" stroke-width="2"/>
+
+  <!-- Sun icon -->
+  <circle cx="160" cy="260" r="32" fill="url(#sunGrad)" filter="url(#sunGlow)"/>
+  <g stroke="url(#sunGrad)" stroke-width="4.5" stroke-linecap="round" filter="url(#sunGlow)">
+    <line x1="160" y1="212" x2="160" y2="222"/>
+    <line x1="160" y1="298" x2="160" y2="308"/>
+    <line x1="112" y1="260" x2="122" y2="260"/>
+    <line x1="198" y1="260" x2="208" y2="260"/>
+    <line x1="126" y1="226" x2="133" y2="233"/>
+    <line x1="187" y1="287" x2="194" y2="294"/>
+    <line x1="126" y1="294" x2="133" y2="287"/>
+    <line x1="187" y1="233" x2="194" y2="226"/>
+  </g>
+
+  <!-- Title -->
+  <text x="300" y="240" font-family="-apple-system, SF Pro Display, Helvetica Neue, Arial, sans-serif" font-size="56" font-weight="700" fill="white">Light Up My Life</text>
+
+  <!-- Subtitle -->
+  <text x="300" y="290" font-family="-apple-system, SF Pro Display, Helvetica Neue, Arial, sans-serif" font-size="24" fill="#F2A900" letter-spacing="4">XDR BRIGHTNESS FOR MACOS</text>
+
+  <!-- Description -->
+  <text x="300" y="340" font-family="-apple-system, SF Pro Display, Helvetica Neue, Arial, sans-serif" font-size="22" fill="#8888aa">Unlock 1,600 nits. Free &amp; open source.</text>
+
+  <!-- Bottom bar -->
+  <rect x="0" y="580" width="1200" height="50" fill="#0a0a1a"/>
+  <text x="80" y="612" font-family="-apple-system, SF Pro Display, Helvetica Neue, Arial, sans-serif" font-size="18" fill="#666688">github.com/ben4mn/light-up-my-life</text>
+  <text x="1120" y="612" font-family="-apple-system, SF Pro Display, Helvetica Neue, Arial, sans-serif" font-size="18" fill="#F2A900" text-anchor="end">MIT License</text>
+
+  <!-- Nits display -->
+  <g transform="translate(800, 180)">
+    <rect width="300" height="180" rx="20" fill="#16162a" stroke="#2a2a50" stroke-width="1.5"/>
+    <text x="150" y="70" text-anchor="middle" font-family="-apple-system, SF Pro Display, Helvetica Neue, Arial, sans-serif" font-size="52" font-weight="300" fill="white">1,600</text>
+    <text x="150" y="100" text-anchor="middle" font-family="-apple-system, SF Pro Display, Helvetica Neue, Arial, sans-serif" font-size="20" fill="#8888aa">nits</text>
+    <!-- Slider track -->
+    <rect x="30" y="130" width="240" height="6" rx="3" fill="#2a2a50"/>
+    <rect x="30" y="130" width="200" height="6" rx="3" fill="url(#accent)"/>
+    <circle cx="230" cy="133" r="10" fill="white"/>
+  </g>
+</svg>

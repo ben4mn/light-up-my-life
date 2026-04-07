@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Light Up My Life — Free XDR Brightness for macOS</title>
+
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Light Up My Life — Free XDR Brightness for macOS">
+    <meta name="description" content="Unlock the full 1,600 nit brightness of your MacBook Pro XDR display. Free, open-source, no subscription. A free alternative to Vivid.">
+
+    <!-- Open Graph / Facebook / iMessage / Slack -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ben4mn.github.io/light-up-my-life/">
+    <meta property="og:title" content="Light Up My Life — Free XDR Brightness for macOS">
+    <meta property="og:description" content="Unlock the full 1,600 nit brightness of your MacBook Pro XDR display. Free & open-source. No subscription.">
+    <meta property="og:image" content="https://ben4mn.github.io/light-up-my-life/social-card.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://ben4mn.github.io/light-up-my-life/">
+    <meta property="twitter:title" content="Light Up My Life — Free XDR Brightness for macOS">
+    <meta property="twitter:description" content="Unlock 1,600 nits on your MacBook Pro. Free & open-source alternative to Vivid.">
+    <meta property="twitter:image" content="https://ben4mn.github.io/light-up-my-life/social-card.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="icon.svg">
+
+    <style>
+        :root {
+            --amber: #F2A900;
+            --amber-light: #FFD700;
+            --bg-dark: #0f0c29;
+            --bg-mid: #1a1a3e;
+            --card-bg: #16162a;
+            --card-border: #2a2a50;
+            --text: #e8e8f0;
+            --text-muted: #8888aa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-mid) 50%, #24243e 100%);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 80px 0 60px;
+        }
+
+        .hero-icon {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 32px;
+            filter: drop-shadow(0 0 30px rgba(242, 169, 0, 0.3));
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #fff 0%, #ddd 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 0.9rem;
+            letter-spacing: 6px;
+            color: var(--amber);
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .hero-desc {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            max-width: 560px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+
+        .hero-desc strong {
+            color: var(--text);
+        }
+
+        /* CTA Buttons */
+        .cta-group {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--amber) 0%, var(--amber-light) 100%);
+            color: #1a1a2e;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(242, 169, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--card-bg);
+            color: var(--text);
+            border: 1px solid var(--card-border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--amber);
+            transform: translateY(-2px);
+        }
+
+        /* Nits Display */
+        .nits-section {
+            text-align: center;
+            padding: 40px 0 60px;
+        }
+
+        .nits-card {
+            display: inline-block;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 40px 60px;
+        }
+
+        .nits-value {
+            font-size: 5rem;
+            font-weight: 200;
+            line-height: 1;
+        }
+
+        .nits-label {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .nits-slider {
+            margin-top: 24px;
+            width: 100%;
+            height: 6px;
+            background: var(--card-border);
+            border-radius: 3px;
+            position: relative;
+        }
+
+        .nits-slider-fill {
+            width: 80%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--amber), var(--amber-light));
+            border-radius: 3px;
+        }
+
+        .nits-slider-thumb {
+            position: absolute;
+            right: 20%;
+            top: 50%;
+            transform: translate(50%, -50%);
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        /* Features */
+        .features {
+            padding: 60px 0;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 48px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 28px;
+            transition: border-color 0.2s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--amber);
+        }
+
+        .feature-icon {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.05rem;
+            margin-bottom: 8px;
+        }
+
+        .feature-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* How it works */
+        .how-it-works {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .how-it-works h2 {
+            font-size: 2rem;
+            margin-bottom: 16px;
+        }
+
+        .how-it-works .desc {
+            color: var(--text-muted);
+            max-width: 640px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        .steps {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .step {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 24px;
+            width: 200px;
+            text-align: center;
+        }
+
+        .step-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: var(--amber);
+            color: var(--bg-dark);
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+
+        .step h3 {
+            font-size: 0.95rem;
+            margin-bottom: 6px;
+        }
+
+        .step p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid var(--card-border);
+            margin-top: 40px;
+        }
+
+        footer p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        footer a {
+            color: var(--amber);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Price callout */
+        .price-callout {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .price-card {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(242, 169, 0, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%);
+            border: 1px solid rgba(242, 169, 0, 0.3);
+            border-radius: 20px;
+            padding: 32px 48px;
+        }
+
+        .price-card .price {
+            font-size: 3rem;
+            font-weight: 700;
+        }
+
+        .price-card .price-note {
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        @media (max-width: 640px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .hero-desc {
+                font-size: 1.1rem;
+            }
+            .nits-value {
+                font-size: 3.5rem;
+            }
+            .steps {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero -->
+        <section class="hero">
+            <img src="icon.svg" alt="Light Up My Life" class="hero-icon">
+            <h1>Light Up My Life</h1>
+            <p class="hero-subtitle">XDR Brightness</p>
+            <p class="hero-desc">
+                Your MacBook Pro can hit <strong>1,600 nits</strong>. macOS only gives you 500.
+                This app unlocks the rest.
+            </p>
+            <div class="cta-group">
+                <a href="https://github.com/ben4mn/light-up-my-life/releases" class="btn btn-primary">
+                    Download
+                </a>
+                <a href="https://github.com/ben4mn/light-up-my-life" class="btn btn-secondary">
+                    View Source
+                </a>
+            </div>
+        </section>
+
+        <!-- Nits Display -->
+        <section class="nits-section">
+            <div class="nits-card">
+                <div class="nits-value">1,600</div>
+                <div class="nits-label">nits</div>
+                <div class="nits-slider">
+                    <div class="nits-slider-fill"></div>
+                    <div class="nits-slider-thumb"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Price -->
+        <section class="price-callout">
+            <div class="price-card">
+                <div class="price">$0</div>
+                <div class="price-note">Free & open source. Forever.</div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="features">
+            <h2>Everything you need. Nothing you don't.</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">&#9728;&#65039;</div>
+                    <h3>Full XDR Brightness</h3>
+                    <p>Boost from 500 to 1,600 nits with a simple slider. Perfect for outdoor use or bright rooms.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#9881;&#65039;</div>
+                    <h3>Menu Bar Native</h3>
+                    <p>Lives quietly in your menu bar. No dock icon, no clutter. Toggle with one click.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#128171;</div>
+                    <h3>Lightweight</h3>
+                    <p>Minimal CPU/GPU impact. Renders a simple solid color at 10 FPS. No battery hog.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#128274;</div>
+                    <h3>No Permissions</h3>
+                    <p>No accessibility access, no admin privileges, no screen recording permission needed.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#128164;</div>
+                    <h3>Sleep/Wake Aware</h3>
+                    <p>Automatically re-applies brightness after your Mac wakes up. Set it and forget it.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#128187;</div>
+                    <h3>Multi-Display</h3>
+                    <p>Works across all connected XDR displays. Non-XDR monitors are skipped automatically.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- How it works -->
+        <section class="how-it-works">
+            <h2>How it works</h2>
+            <p class="desc">
+                Light Up My Life uses Apple's Metal framework to activate your display's
+                Extended Dynamic Range (EDR) mode &mdash; the same technology used for HDR video,
+                applied system-wide.
+            </p>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <h3>Metal Overlay</h3>
+                    <p>Transparent window covers your screen</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <h3>EDR Color Space</h3>
+                    <p>Extended linear P3 unlocks values above 1.0</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <h3>Multiply Blend</h3>
+                    <p>Boosts your content without washing it out</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <h3>Full Brightness</h3>
+                    <p>Display activates XDR mode at up to 1,600 nits</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>
+                Built by <a href="https://github.com/ben4mn">@ben4mn</a> with
+                <a href="https://claude.ai/code">Claude Code</a>
+                &bull; <a href="https://github.com/ben4mn/light-up-my-life">GitHub</a>
+                &bull; MIT License
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
