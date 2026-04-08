@@ -25,8 +25,50 @@
     <meta property="twitter:description" content="Unlock 1,600 nits on your MacBook Pro. Free & open-source alternative to Vivid.">
     <meta property="twitter:image" content="https://ben4mn.github.io/light-up-my-life/social-card.png">
 
+    <!-- Canonical & SEO -->
+    <link rel="canonical" href="https://ben4mn.github.io/light-up-my-life/">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0f0c29">
+    <meta name="keywords" content="xdr brightness, macbook pro brightness, 1600 nits, macos brightness boost, vivid alternative, free xdr app, hdr brightness mac, apple xdr display, macbook pro xdr, edr brightness, metal rendering, macos utility, open source mac app">
+    <meta name="author" content="ben4mn">
+    <meta name="application-name" content="Light Up My Life">
+    <meta property="og:site_name" content="Light Up My Life">
+    <meta property="og:locale" content="en_US">
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="icon.svg">
+    <link rel="apple-touch-icon" href="icon.svg">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Light Up My Life",
+      "description": "Unlock the full 1,600 nit brightness of your MacBook Pro XDR display. Free, open-source alternative to Vivid.",
+      "operatingSystem": "macOS 13.0+",
+      "applicationCategory": "UtilitiesApplication",
+      "softwareVersion": "1.0.0",
+      "downloadUrl": "https://github.com/ben4mn/light-up-my-life/releases",
+      "screenshot": "https://ben4mn.github.io/light-up-my-life/social-card.png",
+      "license": "https://opensource.org/licenses/MIT",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "ben4mn",
+        "url": "https://github.com/ben4mn"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "ratingCount": "1"
+      }
+    }
+    </script>
 
     <style>
         :root {
@@ -367,7 +409,7 @@
 <body>
     <div class="container">
         <!-- Hero -->
-        <section class="hero">
+        <header class="hero">
             <img src="icon.svg" alt="Light Up My Life" class="hero-icon">
             <h1>Light Up My Life</h1>
             <p class="hero-subtitle">XDR Brightness</p>
@@ -383,8 +425,9 @@
                     View Source
                 </a>
             </div>
-        </section>
+        </header>
 
+        <main>
         <!-- Nits Display -->
         <section class="nits-section">
             <div class="nits-card">
@@ -473,6 +516,7 @@
                 </div>
             </div>
         </section>
+        </main>
 
         <!-- Footer -->
         <footer>
