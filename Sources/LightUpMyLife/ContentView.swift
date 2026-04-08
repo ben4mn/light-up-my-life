@@ -85,6 +85,11 @@ struct ContentView: View {
         .padding(.top, 16)
         .padding(.bottom, 12)
         .animation(.easeInOut(duration: 0.3), value: manager.isEnabled)
+        .onTapGesture {
+            if manager.isEDRSupported {
+                manager.isEnabled.toggle()
+            }
+        }
     }
 
     // MARK: - Toggle
